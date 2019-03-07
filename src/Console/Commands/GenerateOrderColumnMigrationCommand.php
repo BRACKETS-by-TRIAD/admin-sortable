@@ -1,6 +1,6 @@
 <?php
 
-namespace Brackets\Sortable\Console\Commands;
+namespace Brackets\AdminSortable\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\File;

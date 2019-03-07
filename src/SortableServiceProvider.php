@@ -1,4 +1,4 @@
-<?php namespace Brackets\Sortable;
+<?php namespace Brackets\AdminSortable;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;

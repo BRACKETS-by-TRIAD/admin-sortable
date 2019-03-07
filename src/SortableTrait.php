@@ -1,6 +1,6 @@
 <?php
 
-namespace Brackets\Sortable;
+namespace Brackets\AdminSortable;
 
 use Brackets\Sortable\SortableScope;
 

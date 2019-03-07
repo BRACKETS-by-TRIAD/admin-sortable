@@ -1,6 +1,6 @@
 <?php
 
-namespace Brackets\Sortable;
+namespace Brackets\AdminSortable;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
