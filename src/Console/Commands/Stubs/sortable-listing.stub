@@ -1,0 +1,8 @@
+@extends('brackets/admin-ui::admin.layout.default')
+
+@section('body')
+	<sortable :data="{{$data}}" 
+			  :post-url="'{{ route('admin/{{modelNamePluralLowerCase}}/sort/update') }}'"
+			  :cancel-url="'{{ url('/admin/{{modelNamePluralLowerCase}}') }}'"
+	></sortable>
+@endsection
