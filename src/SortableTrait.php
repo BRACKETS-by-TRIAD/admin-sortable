@@ -2,7 +2,7 @@
 
 namespace Brackets\AdminSortable;
 
-use Brackets\Sortable\SortableScope;
+use Brackets\AdminSortable\SortableScope;
 
 trait Sortable
 {	

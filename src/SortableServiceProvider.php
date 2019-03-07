@@ -2,10 +2,10 @@
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
-use Brackets\Sortable\Console\Commands\GenerateControllerCommand;
-use Brackets\Sortable\Console\Commands\GenerateSortableResourceCommand;
-use Brackets\Sortable\Console\Commands\GenerateListingCommand;
-use Brackets\Sortable\Console\Commands\GenerateOrderColumnMigrationCommand;
+use Brackets\AdminSortable\Console\Commands\GenerateControllerCommand;
+use Brackets\AdminSortable\Console\Commands\GenerateSortableResourceCommand;
+use Brackets\AdminSortable\Console\Commands\GenerateListingCommand;
+use Brackets\AdminSortable\Console\Commands\GenerateOrderColumnMigrationCommand;
 
 class SortableServiceProvider extends ServiceProvider
 {
