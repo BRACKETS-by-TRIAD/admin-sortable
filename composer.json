@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Brackets\\Sortable\\": "src"
+      "Brackets\\AdminSortable\\": "src"
     }
   },
   "extra": {
