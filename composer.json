@@ -30,7 +30,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Brackets\\Sortable\\SortableServiceProvider"
+        "Brackets\\AdminSortable\\SortableServiceProvider"
       ]
     }
   }
