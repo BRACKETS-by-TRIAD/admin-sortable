@@ -1,37 +1,40 @@
 {
-  "name": "brackets/admin-sortable",
-  "description": "listing of Eloquent models",
-  "keywords": [
-    "datatable",
-    "admin",
-    "cms",
-    "laravel",
-    "vue",
-    "sorting"
-  ],
-  "license": "MIT",
-  "type": "project",
-  "authors": [
-    {
-      "name": "Branislav Zavracky",
-      "email": "branislav.zavracky@brackets.sk",
-      "homepage": "https://www.brackets.sk/en",
-      "role": "Developer"
+    "name": "brackets/admin-sortable",
+    "description": "listing of Eloquent models",
+    "keywords": [
+        "datatable",
+        "admin",
+        "cms",
+        "laravel",
+        "vue",
+        "sorting"
+    ],
+    "license": "MIT",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Branislav Zavracky",
+            "email": "branislav.zavracky@brackets.sk",
+            "homepage": "https://www.brackets.sk/en",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Brackets\\AdminSortable\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Brackets\\AdminSortable\\SortableServiceProvider"
+            ]
+        },
+        "branch-alias": {
+            "dev-laravel-58": "1.0-dev"
+        }
     }
-  ],
-  "require": {
-    "php": ">=7.0.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "Brackets\\AdminSortable\\": "src"
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Brackets\\AdminSortable\\SortableServiceProvider"
-      ]
-    }
-  }
 }
