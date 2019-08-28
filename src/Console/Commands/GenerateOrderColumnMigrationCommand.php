@@ -49,6 +49,12 @@ class GenerateOrderColumnMigrationCommand extends GeneratorCommand
         return $rootNamespace . '\Http\Controllers\Admin';
     }
 
+    public function getFileName(String $name) : String{
+        return collect(explode('_',str_plural($name)))->map(function ($word){
+            return ucfirst($word);
+        })->implode('');
+    }
+
     /**
      * Get the console command options.
      *
@@ -64,15 +70,11 @@ class GenerateOrderColumnMigrationCommand extends GeneratorCommand
         $migrationTemplate = str_replace(
             [
                 '{{fileName}}',
-                '{{modelName}}',
                 '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}'
             ],
             [
-                'AddOrderColumnTo'. ucfirst(str_plural($name)),
-                ucfirst($name),
+                'AddOrderColumnTo'. $this->getFileName($name),
                 strtolower(str_plural($name)),
-                strtolower($name)
             ],
             $this->getStub('Migration')
         );
