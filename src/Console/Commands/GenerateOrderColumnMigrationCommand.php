@@ -49,6 +49,10 @@ class GenerateOrderColumnMigrationCommand extends GeneratorCommand
         return $rootNamespace . '\Http\Controllers\Admin';
     }
 
+    /**
+     * @param String $name
+     * @return String
+     */
     public function getFileName(String $name) : String{
         return collect(explode('_',str_plural($name)))->map(function ($word){
             return ucfirst($word);

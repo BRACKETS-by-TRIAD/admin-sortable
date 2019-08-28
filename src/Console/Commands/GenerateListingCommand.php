@@ -62,7 +62,7 @@ class GenerateListingCommand extends GeneratorCommand
 
 	protected function view($name)
 	{
-        $name = str_replace("_","-",$name);
+        $name = str_replace( "_" , "-" , $name );
 
         $listingTemplate = str_replace(
 			[

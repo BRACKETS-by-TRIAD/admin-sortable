@@ -60,22 +60,37 @@ class GenerateControllerCommand extends GeneratorCommand
         return [];
     }
 
+    /**
+     * @param String $name
+     * @return String
+     */
     public function getSingularName(String $name) : String{
         return collect(explode('_',str_singular($name)))->map(function ($word){
             return ucfirst($word);
         })->implode('');
     }
 
+    /**
+     * @param String $name
+     * @return String
+     */
     public function getPluralName(String $name) : String{
         return collect(explode('_',str_plural($name)))->map(function ($word){
             return ucfirst($word);
         })->implode('');
     }
 
+    /**
+     * @param String $name
+     * @return String
+     */
     public function getRouteName(String $name) : String{
         return strtolower(str_replace('_', '-', $name));
     }
 
+    /**
+     * @param $name
+     */
     protected function controller($name)
     {
         $controllerTemplate = str_replace(
@@ -97,6 +112,9 @@ class GenerateControllerCommand extends GeneratorCommand
         file_put_contents(app_path("/Http/Controllers/Admin/".$this->getPluralName($name)."SortableController.php"), $controllerTemplate);
     }
 
+    /**
+     *
+     */
     public function handle()
     {
         $name = $this->argument('name');
