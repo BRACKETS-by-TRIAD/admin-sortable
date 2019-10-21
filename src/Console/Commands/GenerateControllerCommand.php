@@ -65,7 +65,7 @@ class GenerateControllerCommand extends GeneratorCommand
      * @return String
      */
     public function getSingularName(String $name) : String{
-        return collect(explode('_',str_singular($name)))->map(function ($word){
+        return collect(explode('_',str_singular($name)))->map(static function ($word){
             return ucfirst($word);
         })->implode('');
     }
@@ -75,7 +75,7 @@ class GenerateControllerCommand extends GeneratorCommand
      * @return String
      */
     public function getPluralName(String $name) : String{
-        return collect(explode('_',str_plural($name)))->map(function ($word){
+        return collect(explode('_',str_plural($name)))->map(static function ($word){
             return ucfirst($word);
         })->implode('');
     }

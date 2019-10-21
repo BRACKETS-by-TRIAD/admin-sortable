@@ -54,7 +54,7 @@ class GenerateOrderColumnMigrationCommand extends GeneratorCommand
      * @return String
      */
     public function getFileName(String $name) : String{
-        return collect(explode('_',str_plural($name)))->map(function ($word){
+        return collect(explode('_',str_plural($name)))->map(static function ($word){
             return ucfirst($word);
         })->implode('');
     }
