@@ -62,7 +62,9 @@ class GenerateListingCommand extends GeneratorCommand
 
 	protected function view($name)
 	{
-		$listingTemplate = str_replace(
+        $name = str_replace( "_" , "-" , $name );
+
+        $listingTemplate = str_replace(
 			[
 				'{{modelNamePluralLowerCase}}',
 			],

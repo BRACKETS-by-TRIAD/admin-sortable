@@ -50,6 +50,16 @@ class GenerateOrderColumnMigrationCommand extends GeneratorCommand
     }
 
     /**
+     * @param String $name
+     * @return String
+     */
+    public function getFileName(String $name) : String{
+        return collect(explode('_',str_plural($name)))->map(static function ($word){
+            return ucfirst($word);
+        })->implode('');
+    }
+
+    /**
      * Get the console command options.
      *
      * @return array
@@ -64,15 +74,11 @@ class GenerateOrderColumnMigrationCommand extends GeneratorCommand
         $migrationTemplate = str_replace(
             [
                 '{{fileName}}',
-                '{{modelName}}',
                 '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}'
             ],
             [
-                'AddOrderColumnTo'. ucfirst(str_plural($name)),
-                ucfirst($name),
+                'AddOrderColumnTo'. $this->getFileName($name),
                 strtolower(str_plural($name)),
-                strtolower($name)
             ],
             $this->getStub('Migration')
         );
