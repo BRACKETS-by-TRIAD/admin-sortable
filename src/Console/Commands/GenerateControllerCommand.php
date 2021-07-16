@@ -84,14 +84,6 @@ class GenerateControllerCommand extends GeneratorCommand
      * @param String $name
      * @return String
      */
-    public function getPluralNameForRoutePrefix(String $name) : String{
-        return collect(explode('_',str_plural($name)))->implode('');
-    }
-
-    /**
-     * @param String $name
-     * @return String
-     */
     public function getRouteName(String $name) : String{
         return strtolower(str_replace('_', '-', str_plural($name)));
     }
