@@ -4,6 +4,7 @@ namespace Brackets\AdminSortable\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class GenerateListingCommand extends GeneratorCommand
 {
@@ -62,7 +63,7 @@ class GenerateListingCommand extends GeneratorCommand
 
 	protected function view($name)
 	{
-        $name = str_replace( "_" , "-" , $name );
+        $name = Str::kebab($name);
 
         $listingTemplate = str_replace(
 			[

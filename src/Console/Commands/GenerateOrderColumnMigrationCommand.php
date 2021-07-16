@@ -4,6 +4,7 @@ namespace Brackets\AdminSortable\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class GenerateOrderColumnMigrationCommand extends GeneratorCommand
 {
@@ -71,6 +72,8 @@ class GenerateOrderColumnMigrationCommand extends GeneratorCommand
 
     protected function migration($name)
     {
+        $name = Str::snake($name);
+
         $migrationTemplate = str_replace(
             [
                 '{{fileName}}',
@@ -87,7 +90,7 @@ class GenerateOrderColumnMigrationCommand extends GeneratorCommand
 
         file_put_contents(base_path('database/migrations/'. $migrationFileName), $migrationTemplate);
 
-        $this->info("database/migrations/". $migrationFileName . "generated sucessfully");
+        $this->info("database/migrations/". $migrationFileName . " generated sucessfully");
     }
 
     public function handle()
