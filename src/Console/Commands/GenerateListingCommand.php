@@ -75,6 +75,8 @@ class GenerateListingCommand extends GeneratorCommand
 		);
 
 		file_put_contents(resource_path("views/admin/".str_singular($name)."/sortable-listing.blade.php"), $listingTemplate);
+
+        $this->info("views/admin/".str_singular($name)."/sortable-listing.blade.php generated sucessfully");
 	}
 
 	public function handle()
