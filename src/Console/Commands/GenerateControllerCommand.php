@@ -4,6 +4,7 @@ namespace Brackets\AdminSortable\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class GenerateControllerCommand extends GeneratorCommand
 {
@@ -104,14 +105,14 @@ class GenerateControllerCommand extends GeneratorCommand
                 $this->getSingularName($name),
                 $this->getPluralName($name).'Sortable',
                 $this->getRouteName($name),
-                strtolower($this->getSingularName($name))
+                strtolower(str_replace('_', '-', str_singular($name))),
             ],
             $this->getStub('Controller')
         );
 
         file_put_contents(app_path("/Http/Controllers/Admin/".$this->getPluralName($name)."SortableController.php"), $controllerTemplate);
 
-        $this->info("/Http/Controllers/Admin/".$this->getPluralName($name)."SortableController.php generated sucessfully");
+        $this->info(app_path("/Http/Controllers/Admin/".$this->getPluralName($name))."SortableController.php generated sucessfully");
     }
 
     /**
@@ -119,7 +120,7 @@ class GenerateControllerCommand extends GeneratorCommand
      */
     public function handle()
     {
-        $name = $this->argument('name');
+        $name = Str::snake($this->argument('name'));
 
         $this->controller($name);
 

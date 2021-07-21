@@ -90,7 +90,7 @@ class GenerateOrderColumnMigrationCommand extends GeneratorCommand
 
         file_put_contents(base_path('database/migrations/'. $migrationFileName), $migrationTemplate);
 
-        $this->info("database/migrations/". $migrationFileName . " generated sucessfully");
+        $this->info(base_path('database/migrations/'. $migrationFileName) . " generated sucessfully");
     }
 
     public function handle()
