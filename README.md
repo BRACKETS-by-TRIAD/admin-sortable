@@ -10,9 +10,9 @@ Admin Sortable requires:
 ### Steps
 
 1. Run `composer require brackets/admin-sortable` in your Craftable project folder.
-2. Run `npm install @shopify/draggable@1.0.0-beta.8` in your Craftable project folder.
+2. Run `npm install @shopify/draggable` in your Craftable project folder.
 3. Run `php artisan vendor:publish --provider="Brackets\AdminSortable\SortableServiceProvider" --tag="vue-components"` for publishing vue components and assets.
-4. Add `require('./vendor/sortable/app');` to your `resources/js/admin/admin.js` file
+4. Add `require('./vendor/sortable/app');` to top of your `resources/js/admin/admin.js` file
 5. Compile assets `npm run dev`
 
 ## Add sortable feature for existing model
