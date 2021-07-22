@@ -4,6 +4,7 @@ namespace Brackets\AdminSortable\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class GenerateControllerCommand extends GeneratorCommand
 {
@@ -85,7 +86,7 @@ class GenerateControllerCommand extends GeneratorCommand
      * @return String
      */
     public function getRouteName(String $name) : String{
-        return strtolower(str_replace('_', '-', $name));
+        return strtolower(str_replace('_', '-', str_plural($name)));
     }
 
     /**
@@ -104,12 +105,14 @@ class GenerateControllerCommand extends GeneratorCommand
                 $this->getSingularName($name),
                 $this->getPluralName($name).'Sortable',
                 $this->getRouteName($name),
-                strtolower($this->getSingularName($name))
+                strtolower(str_replace('_', '-', str_singular($name))),
             ],
             $this->getStub('Controller')
         );
 
         file_put_contents(app_path("/Http/Controllers/Admin/".$this->getPluralName($name)."SortableController.php"), $controllerTemplate);
+
+        $this->info(app_path("/Http/Controllers/Admin/".$this->getPluralName($name))."SortableController.php generated sucessfully");
     }
 
     /**
@@ -117,16 +120,18 @@ class GenerateControllerCommand extends GeneratorCommand
      */
     public function handle()
     {
-        $name = $this->argument('name');
+        $name = Str::snake($this->argument('name'));
 
         $this->controller($name);
 
         File::append(base_path('routes/web.php'),
             "
-			Route::middleware(['admin'])->group(function () {
-				Route::get('/admin/sort/". $this->getRouteName($name) ."', 'Admin\\". $this->getPluralName($name) ."SortableController@index')->name('admin/". $this->getRouteName($name) . "/sort');
-				Route::post('/admin/update-order/". $this->getRouteName($name) ."', 'Admin\\". $this->getPluralName($name) ."SortableController@update')->name('admin/". $this->getRouteName($name) . "/sort/update');
-			});
-		");
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        ". str_pad("Route::get('/sort/". $this->getRouteName($name) . "',", 60) . "'" . $this->getPluralName($name) ."SortableController@index')->name('". $this->getRouteName($name) . "/sort');" . "
+        ". str_pad("Route::post('/update-order/". $this->getRouteName($name) . "',", 60) . "'" . $this->getPluralName($name) ."SortableController@update')->name('". $this->getRouteName($name) . "/sort/update');" . "
+    });
+});
+            ");
     }
 }

@@ -27,7 +27,7 @@ class SortableServiceProvider extends ServiceProvider
 
 		$this->publishes([
 			__DIR__ . '/../resources/assets' =>
-				resource_path('assets/admin/js/vendor/sortable')
+				resource_path('js/admin/vendor/sortable')
 		], 'vue-components');
 
 		Builder::macro('updateOrder', function (array $sortedArray) {
