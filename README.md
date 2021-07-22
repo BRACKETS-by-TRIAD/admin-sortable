@@ -19,7 +19,7 @@ Admin Sortable requires:
 1. Run `php artisan make:sortable ModelName` (this will generate migration, controller and sortable listing, if you want to generate this files separately follow the steps in [Generate sortable files separately](#generate-sortable-files-separately) section )
 2. Run `php artisan migrate`
 3. Add following button to resources/views/admin/model-name/index.blade.php file on place where you want to have Sort items button
-```php
+```html
     <a href="{{ route('admin/model-name/sort') }}" class="btn btn-primary">Sort items</a>          
 ```
 4. Compile assets `npm run dev`
