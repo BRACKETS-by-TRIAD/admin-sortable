@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\{{modelName}};
-use App\Http\Requests\Admin\{{modelName}}\UpdateOrder;
 
 class {{className}}Controller extends Controller {
 
@@ -16,7 +16,7 @@ class {{className}}Controller extends Controller {
 	 */
 	public function index()
 	{
-		$data = {{modelName}}::orderBy('order_column', 'asc')->get(['id', 'title']);
+		$data = {{modelName}}::orderBy('order_column', 'asc')->get({{columnsToQuery}});
 
 		return view('admin.{{modelNameSingularLowerCase}}.sortable-listing', compact('data'));
 	}
@@ -24,8 +24,8 @@ class {{className}}Controller extends Controller {
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
-	 * @return Response
+     * @param Request $request
+     * @return array
 	 */
 	public function update(Request $request)
 	{
