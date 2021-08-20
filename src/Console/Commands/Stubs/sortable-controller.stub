@@ -16,7 +16,7 @@ class {{className}}Controller extends Controller {
 	 */
 	public function index()
 	{
-		$data = {{modelName}}::orderBy('order_column', 'asc')->get(['id', 'title']);
+		$data = {{modelName}}::orderBy('order_column', 'asc')->get({{columnsToQuery}});
 
 		return view('admin.{{modelNameSingularLowerCase}}.sortable-listing', compact('data'));
 	}

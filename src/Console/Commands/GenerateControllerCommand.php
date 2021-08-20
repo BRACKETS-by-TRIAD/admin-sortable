@@ -2,12 +2,15 @@
 
 namespace Brackets\AdminSortable\Console\Commands;
 
+use Brackets\AdminSortable\Traits\Columns;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class GenerateControllerCommand extends GeneratorCommand
 {
+
+    use Columns;
 
     /**
      * The name and signature of the console command.
@@ -90,6 +93,25 @@ class GenerateControllerCommand extends GeneratorCommand
     }
 
     /**
+     * @param String $name
+     * @return array
+     */
+    public function getColumnsToQuery(String $name): array {
+        $tableName = strtolower(str_plural($name));
+
+        return $this->readColumnsFromTable($tableName)->filter(function($column) use ($tableName) {
+            if($this->readColumnsFromTable($tableName)->contains('name', 'created_by_admin_user_id')){
+                return !($column['type'] == 'text' || $column['name'] == "password" || $column['name'] == "remember_token" || $column['name'] == "slug" || $column['name'] == "updated_at" || $column['name'] == "deleted_at");
+            } else if($this->readColumnsFromTable($tableName)->contains('name', 'updated_by_admin_user_id')) {
+                return !($column['type'] == 'text' || $column['name'] == "password" || $column['name'] == "remember_token" || $column['name'] == "slug" || $column['name'] == "created_at" ||  $column['name'] == "deleted_at");
+            } else if($this->readColumnsFromTable($tableName)->contains('name', 'created_by_admin_user_id') && $this->readColumnsFromTable($tableName)->contains('name', 'updated_by_admin_user_id')) {
+                return !($column['type'] == 'text' || $column['name'] == "password" || $column['name'] == "remember_token" || $column['name'] == "slug" || $column['name'] == "deleted_at");
+            }
+            return !($column['type'] == 'text' || $column['name'] == "password" || $column['name'] == "remember_token" || $column['name'] == "slug" || $column['name'] == "created_at" || $column['name'] == "updated_at" || $column['name'] == "deleted_at");
+        })->pluck('name')->toArray();
+    }
+
+    /**
      * @param $name
      */
     protected function controller($name)
@@ -99,13 +121,15 @@ class GenerateControllerCommand extends GeneratorCommand
                 '{{modelName}}',
                 '{{className}}',
                 '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}'
+                '{{modelNameSingularLowerCase}}',
+                '{{columnsToQuery}}'
             ],
             [
                 $this->getSingularName($name),
                 $this->getPluralName($name).'Sortable',
                 $this->getRouteName($name),
                 strtolower(str_replace('_', '-', str_singular($name))),
+                json_encode($this->getColumnsToQuery($name)),
             ],
             $this->getStub('Controller')
         );
